@@ -4,11 +4,14 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const dbConnect = require("./utils/dbConnect");
 const bodyParser = require("body-parser");
+const authRouter = require("./routes/auth_routes");
 
 dbConnect.initDB();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use("/api/auth", authRouter);
 
 app.use((req, res, next) => {
     console.log("Hello from middleware");
