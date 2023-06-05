@@ -27,7 +27,7 @@ const hotelSchema = new mongoose.Schema({
     },
     mobile:{
         type: String,
-        // required: true,
+        required: true,
     },
     images: [String],
     description: {
@@ -49,8 +49,9 @@ const hotelSchema = new mongoose.Schema({
     rating: {
         type: Number,
     },
-    numReviews: {
+    numOfRooms:{
         type: Number,
+        required: true,
     },
     reviews: [reviewSchema],
     createdOn: {

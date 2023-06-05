@@ -98,3 +98,29 @@ Authorization: Bearer {{token}}
 {
     "comment": "First Review"
 }
+
+### Delete a particular Hotel by Id
+DELETE {{baseUrl}}/hotel/647da39382bcf045c941e58a
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+### Booking
+GET {{baseUrl}}/booking
+content-type: application/json
+Authorization: Bearer {{token}}
+
+### Adding Hotel in Booking
+POST {{baseUrl}}/booking
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "hotelId":"647d9e476ec2cba43a167b4b",
+    "rooms":4
+}
+
+### Removing Hotel in Booking
+DELETE  {{baseUrl}}/booking/647d9e476ec2cba43a167b4b
+content-type: application/json
+Authorization: Bearer {{token}}

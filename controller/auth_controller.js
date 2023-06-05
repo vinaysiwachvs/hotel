@@ -104,7 +104,7 @@ exports.verifyToken = async (req, res, next) => {
     const token = authHeader.split(" ")[1];
     if (!token)
         throw new Error({ message: "Access Denied. Please send Token" });
-    console.log("token " + token);
+    console.log("token" + token);
 
     const user = await authService.verifyToken(token);
     req.loggedInUser = user;

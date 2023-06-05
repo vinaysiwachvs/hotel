@@ -72,6 +72,17 @@ const UserSchema = new mongoose.Schema({
         enum: ["admin", "user"],
         default: "user",
     },
+    book: [{
+        hotelId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Hotel"
+        },
+        rooms: {
+            type: Number,
+            default: 1
+        }
+    }]
+
 });
 
 UserSchema.pre("save", async function(next) {

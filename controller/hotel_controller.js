@@ -3,12 +3,12 @@ const hotelService = require("../service/hotel_service");
 
 exports.createHotel = async(req, res) => {
     try {
-        const { name, images, description, price, location, amenities } = req.body;
+        const { name, images, description, price, location, amenities, mobile, numOfRooms } = req.body;
         const user = req.loggedInUser;
         if (!user) {
             throw new Error("User not found");
         }
-        const hotel = new Hotel({ name, images, description, price, location, amenities, createdBy: user._id, updatedBy: user._id,});
+        const hotel = new Hotel({ name, images, description, price, location, amenities, mobile, numOfRooms ,createdBy: user._id, updatedBy: user._id,});
         await hotelService.createHotel(hotel);
 
         res.status(201).send({ message: "Hotel created successfully" });
