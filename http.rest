@@ -1,0 +1,100 @@
+@baseUrl = http://localhost:3000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDdkODk2MGNhMGExNTc5MDMzYWEwZmIiLCJuYW1lIjoiVmluYXkiLCJlbWFpbCI6InZpbmF5MTJzaXdhY2hAZ21haWwuY29tIiwiaWF0IjoxNjg1OTUxMDU1LCJleHAiOjE2ODU5OTQyNTV9.nVODbIsv0kkv0G9UEP10QHMv1OuFNZa1CStC_udMx7o
+
+
+###
+POST {{baseUrl}}/auth/signup
+Content-Type: application/json
+
+{
+    "name":"Test",
+    "email":"test@gmail.com",
+    "password":"Password@123",
+    "mobile": "9876543210",
+    "role":"admin"
+}
+
+### Mobile Verification
+POST {{baseUrl}}/auth/mobile-otp-verification
+Content-Type: application/json
+
+{
+    "mobile": "9876543210",
+    "otp" : "132621"
+}
+
+### E-mail Verification
+POST {{baseUrl}}/auth/email-otp-verification
+Content-Type: application/json
+
+{
+    "email":"test@gmail.com",
+    "otp" : "132621"
+}
+
+### Login 
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "email":"vinay12siwach@gmail.com",
+    "password":"Password@123"
+}
+
+### LogOut
+POST {{baseUrl}}/auth/logout
+Content-Type: application/json
+Authorization: bearer {{token}}
+
+{
+    "email":"vinay12siwach@gmail.com",
+    "password":"Password@123"
+}
+
+### Adding Hotel
+POST {{baseUrl}}/hotel
+Content-Type: application/json
+Authorization: bearer {{token}}
+
+{
+    "name":"Hotel 1",
+    "mobile":"9876543210",
+    "price":"1999",
+    "description":"Description 1",
+    "location":"City 1, State, Zip",
+    "image":"Image 1",
+    "amenities":"Amenities 1"
+}
+
+
+###
+POST {{baseUrl}}/hotel
+Content-Type: application/json
+Authorization: bearer {{token}}
+
+{
+    "name":"Hotel 2",
+    "mobile":"9876543211",
+    "price":"2599",
+    "description":"Description 2",
+    "location":"City 2, State, Zip",
+    "image":"Image 2",
+    "amenities":"Amenities 1"
+}
+
+### Get all hotels per page 
+GET {{baseUrl}}/hotel
+Content-Type: application/json
+
+### Get a particular hotel by Id
+GET {{baseUrl}}/hotel/647da39382bcf045c941e58a
+Content-Type: application/json
+
+### Create a Review on a particular hotel by it's Id
+POST {{baseUrl}}/hotel/647da39382bcf045c941e58a/review
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "comment": "First Review"
+}
