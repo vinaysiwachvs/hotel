@@ -1,44 +1,35 @@
-const bookService = require("../service/booking_service");
+const bookingService = require("../service/booking_service");
 
-exports.addToBook = async (req, res) => {
+exports.bookHotel = async(req, res) => {
     try {
-        const { hotelId, rooms } = req.body;
-        const userId = req.loggedInUser._id;
-        const result = await bookService.addToBook(userId, hotelId, rooms);
-        res
-            .status(200)
-            .json({ message: "Rooms are selected." });
+        const { hotelId, userId, checkInDate, checkOutDate, rooms } = req.body;
+
+        const booking = await bookingService.bookHotel(hotelId,userId,checkInDate,checkOutDate,rooms);
+
+        res.status(200).send({ booking });
     } catch (error) {
         console.error(error);
-        res.status(400).json({ message: error.message });
+        res
+            .status(400)
+            .json({ error: "An error occurred while booking the hotel." });
     }
 };
 
-exports.removeFromBook = async (req, res) => {
+exports.cancelBookedHotel = async(req, res) => {
     try {
-        const userId = req.loggedInUser._id;
-        const hotelId = req.params.hotelId;
+        const { bookingId } = req.params;
 
-        const book = await bookService.removeFromBook(userId, hotelId);
+        const canceledBooking = await bookingService.cancelBookedHotel(bookingId);
 
+        if (canceledBooking) {
+            res.status(200).json({ message: "Booking canceled successfully." });
+        } else {
+            res.status(404).json({ error: "Booking not found." });
+        }
+    } catch (error) {
+        console.error(error);
         res
-            .status(200)
-            .json({ message: "Rooms are removed." });
-    } catch (error) {
-        console.error(error);
-        res.status(400).json({ message: error.message });
-    }
-};
-
-exports.getBooking = async (req, res) => {
-    try {
-        const userId = req.loggedInUser._id;
-
-        const cart = await bookService.getBooking(userId);
-
-        res.status(200).send(cart);
-    } catch (error) {
-        console.error(error);
-        res.status(400).json({ message: error.message });
+            .status(400)
+            .json({ error: "An error occurred while canceling the hotel booking." });
     }
 };

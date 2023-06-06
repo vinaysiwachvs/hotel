@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const reviewSchema = new mongoose.Schema({
-    user : {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,
@@ -14,7 +14,6 @@ const reviewSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-
 }, {
     timestamps: true,
 });
@@ -25,36 +24,35 @@ const hotelSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    contact:{
+    mobile: {
         type: String,
+        // required: true,
+    },
+    images: {
+        type: [String],
         required: true,
     },
-    images: [String],
     description: {
         type: String,
         required: true,
     },
     price: {
         type: Number,
-        required:true,
+        required: true,
     },
     address: {
         type: String,
         required: true,
-        },
-    amenities:{
+    },
+    amenities: {
         type: [String],
         required: true,
     },
     rating: {
         type: Number,
     },
-    totalRooms:{
-        type: Number
-    },
-    totalAvaliableRooms:{
+    numReviews: {
         type: Number,
-
     },
     reviews: [reviewSchema],
     createdOn: {
@@ -62,18 +60,29 @@ const hotelSchema = new mongoose.Schema({
         default: Date.now(),
         immutable: true,
     },
-    isActive: {
-        type: Boolean,
-        default: true,
-    },
+
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,
         immutable: true,
     },
+    rooms: {
+        type: Number,
+        required: true,
+    },
+    availableRooms: {
+        type: Number,
+        required: true,
+    },
+    isActive: {
+        type: Boolean,
+        default: true,
+    },
 }, {
     timestamps: true,
 });
 
-module.exports = mongoose.model("Hotel", hotelSchema);
+const Hotel = mongoose.model("Hotel", hotelSchema);
+
+module.exports = { Hotel };

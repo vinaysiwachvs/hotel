@@ -1,6 +1,14 @@
 @baseUrl = http://localhost:3000/api
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDdkODk2MGNhMGExNTc5MDMzYWEwZmIiLCJpYXQiOjE2ODYwNDY1NzgsImV4cCI6MTY4NjA4OTc3OH0.xJGsaPBsmqsDZVWjCFLY2GeNeZSumzJ4Q7mOGe1iCjI
 @address = delhi
+@minPrice = 5000
+@maxPrice = 10000
+
+@userId = 
+
+@hotelId =
+
+@bookingId =
 
 
 ###
@@ -55,8 +63,8 @@ GET {{baseUrl}}/user
 Content-Type: application/json
 Authorization: bearer {{token}}
 
-### Adding Hotel
 
+### Adding Hotel
 POST {{baseUrl}}/hotel
 Content-Type: application/json
 Authorization: bearer {{token}}
@@ -77,16 +85,17 @@ GET {{baseUrl}}/hotel
 Content-Type: application/json
 
 ### Get a particular hotel by Id
-GET {{baseUrl}}/hotel/647f05e52f6e60bf6e55fafe
+GET {{baseUrl}}/hotel/647f25ad8ba4bd4de19b2c2a
 Content-Type: application/json
 
 ### Create a Review on a particular hotel by it's Id
-POST {{baseUrl}}/hotel/647dca85c0f25dc88acfe2b8/review
+POST {{baseUrl}}/hotel/647d9e476ec2cba43a167b4b/review
 content-type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "comment": "First Review on Hotel 3"
+    "comment": "First Review on Hotel 3",
+    "rating": 5
 }
 
 ### Delete a particular Hotel by Id
@@ -95,27 +104,31 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 
-### Booking
-GET {{baseUrl}}/booking
-content-type: application/json
-Authorization: Bearer {{token}}
-
-### Adding Hotel in Booking
-POST {{baseUrl}}/booking
-content-type: application/json
-Authorization: Bearer {{token}}
-
-{
-    "hotelId":"647dcbf9923d6e3cd36f15af",
-    "rooms":2
-}
-
-### Removing Hotel in Booking
-DELETE  {{baseUrl}}/booking/647dcbf9923d6e3cd36f15af
-content-type: application/json
-Authorization: Bearer {{token}}
-
 ### Search by Location
 GET {{baseUrl}}/hotel/search/address/{{address}}
 content-type: application/json
 Authorization: Bearer {{token}}
+
+
+### Search by Price
+GET {{baseUrl}}/hotel/search/price/{{minPrice}}/{{maxPrice}}
+content-type: application/json
+Authorization: Bearer {{token}}
+
+###
+POST {{baseUrl}}/hotel/booking
+Content-Type: application/json
+Authorization: bearer {{token}}
+
+{
+    "hotelId":"{{hotelId}}",
+    "userId":"{{userId}}",
+    "checkInDate": "2023-06-10",
+    "checkOutDate": "2023-06-12",
+    "rooms": 3
+}
+
+###
+DELETE {{baseUrl}}/hotel/booking/{{bookingId}}
+Content-Type: application/json
+Authorization: bearer {{token}}

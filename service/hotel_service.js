@@ -1,4 +1,4 @@
-const Hotel = require("../model/hotel");
+const { Hotel } = require("../model/hotel");
 
 exports.getAllHotel = async(page, limit) => {
     const parsedPage = parseInt(page);
@@ -10,10 +10,9 @@ exports.getAllHotel = async(page, limit) => {
     const skipIndex = (parsedPage - 1) * parsedLimit;
 
     const hotels = await Hotel.aggregate([{
-            $project: {_id: 1,name: 1,images: 1,price: 1,description: 1,createdOn: 1,},
-        },
-        { $skip: skipIndex },
-        { $limit: parsedLimit },
+            $project: {_id: 1,name: 1,images: 1,price: 1,description: 1,createdOn: 1,},},
+            { $skip: skipIndex },
+            { $limit: parsedLimit },
     ]);
 
     if (!hotels[0]) throw new Error("Hotel not found");
@@ -24,12 +23,12 @@ exports.getAllHotel = async(page, limit) => {
 exports.createHotel = async(hotel) => {
     console.log("In create Hotel ", hotel);
     await hotel.save();
-    return hotel._id;
+    return hotel.id;
 };
 
 exports.getHotelById = async(id) => {
     const hotel = await Hotel.findById(id);
-    if(hotel.isActive == false){
+    if (hotel.isActive == false) {
         throw new Error("Hotel is inactive");
     }
     console.log(hotel);
@@ -63,20 +62,20 @@ exports.createReview = async(hotelId, userId, comment, rating) => {
     }
 };
 
-exports.deleteHotel = async (hotelId,userId) => {
-    try{
+exports.deleteHotel = async(hotelId, userId) => {
+    try {
         const hotel = await Hotel.findById(hotelId);
-        if(!hotel.createdBy==userId) throw new Error("Not authorized to delete hotel");
-        const deletedHotel= await Hotel.findByIdAndUpdate(hotelId,{isActive : false});
-        if(!deletedHotel){
+        if (!hotel.createdBy == userId)
+            throw new Error("Not authorized to delete hotel");
+        const deletedHotel = await Hotel.findByIdAndUpdate(hotelId, {
+            isActive: false,
+        });
+        if (!deletedHotel) {
             console.log("Hotel not found");
             return { message: "Hotel do not exist" };
-        }
-        else  return { message: "Hotel removed successfully" };
-    } catch(error){
-
+        } else return { message: "Hotel removed successfully from list" };
+    } catch (error) {
         console.error(error);
         throw new Error("Failed to delete Hotel");
     }
 };
-
