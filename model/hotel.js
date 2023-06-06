@@ -25,7 +25,7 @@ const hotelSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    mobile:{
+    contact:{
         type: String,
         required: true,
     },
@@ -59,7 +59,10 @@ const hotelSchema = new mongoose.Schema({
         default: Date.now(),
         immutable: true,
     },
-
+    isActive: {
+        type: Boolean,
+        default: true,
+    },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",

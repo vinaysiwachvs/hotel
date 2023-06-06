@@ -60,9 +60,9 @@ exports.createReview = async(hotelId, userId, comment, rating) => {
     }
 };
 
-exports.deleteProduct = async (hotelId,userId) => {
+exports.deleteHotel = async (hotelId,userId) => {
     try{
-        const hotel = await Hotel.findById(id);
+        const hotel = await Hotel.findById(hotelId);
         if(!hotel.createdBy==userId) throw new Error("Not authorized to delete hotel");
         const deletedHotel= await Hotel.findByIdAndRemove(hotelId);
         if(!deletedHotel){

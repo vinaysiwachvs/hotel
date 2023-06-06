@@ -46,10 +46,7 @@ POST {{baseUrl}}/auth/logout
 Content-Type: application/json
 Authorization: bearer {{token}}
 
-{
-    "email":"vinay12siwach@gmail.com",
-    "password":"Password@123"
-}
+{}
 
 ### Adding Hotel
 POST {{baseUrl}}/hotel

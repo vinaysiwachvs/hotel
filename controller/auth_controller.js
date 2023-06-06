@@ -91,7 +91,7 @@ exports.logout = async (req, res) => {
         res.status(200).send({ message: "Logged out successfully" });
     } catch (error) {
         console.log("error in user post ", error);
-        res.status(400).send({ message: error.message });
+        res.status(401).send({ message: error.message });
     }
 };
 
