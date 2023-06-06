@@ -73,13 +73,14 @@ Content-Type: application/json
 Authorization: bearer {{token}}
 
 {
-    "name":"Hotel 2",
-    "mobile":"9876543211",
-    "price":"2599",
-    "description":"Description 2",
-    "location":"City 2, State, Zip",
-    "image":"Image 2",
-    "amenities":"Amenities 1"
+    "name":"Hotel 3",
+    "mobile":"9876543214",
+    "price":"2099",
+    "description":"Description 3",
+    "location":"City 3, State, Zip",
+    "image":"Image 3",
+    "amenities":"Amenities 1",
+    "numOfRooms": 20
 }
 
 ### Get all hotels per page 
@@ -87,20 +88,20 @@ GET {{baseUrl}}/hotel
 Content-Type: application/json
 
 ### Get a particular hotel by Id
-GET {{baseUrl}}/hotel/647da39382bcf045c941e58a
+GET {{baseUrl}}/hotel/647dcbf9923d6e3cd36f15af
 Content-Type: application/json
 
 ### Create a Review on a particular hotel by it's Id
-POST {{baseUrl}}/hotel/647da39382bcf045c941e58a/review
+POST {{baseUrl}}/hotel/647dca85c0f25dc88acfe2b8/review
 content-type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "comment": "First Review"
+    "comment": "First Review on Hotel 3"
 }
 
 ### Delete a particular Hotel by Id
-DELETE {{baseUrl}}/hotel/647da39382bcf045c941e58a
+DELETE {{baseUrl}}/hotel/647dcbf9923d6e3cd36f15af
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -116,11 +117,11 @@ content-type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "hotelId":"647d9e476ec2cba43a167b4b",
-    "rooms":4
+    "hotelId":"647dcbf9923d6e3cd36f15af",
+    "rooms":2
 }
 
 ### Removing Hotel in Booking
-DELETE  {{baseUrl}}/booking/647d9e476ec2cba43a167b4b
+DELETE  {{baseUrl}}/booking/647dcbf9923d6e3cd36f15af
 content-type: application/json
 Authorization: Bearer {{token}}
