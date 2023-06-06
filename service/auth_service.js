@@ -21,7 +21,7 @@ exports.login = async(email, inputPassword) => {
     if (!isMatch) {
         throw new Error("Invalid credentials");
     }
-    const token = jwt.sign({ _id: user._id, name: user.name, email: user.email },
+    const token = jwt.sign({ _id: user._id },
         process.env.ACCESS_TOKEN_SECRET, {
             expiresIn: "12h",
         }

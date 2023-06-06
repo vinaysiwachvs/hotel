@@ -9,6 +9,7 @@ const swaggerUi = require('swagger-ui-express');
 swaggerDocument = require('./swagger.json');
 const authRouter = require("./routes/auth_routes");
 const hotelRouter = require("./routes/hotel_routes");
+const userRouter = require("./routes/user_routes");
 const bookingRouter = require("./routes/booking_routes")
 
 dbConnect.initDB();
@@ -19,6 +20,7 @@ app.use(cors());
 
 app.use("/api/auth", authRouter);
 app.use("/api/hotel", hotelRouter);
+app.use("/api/user", userRouter);
 app.use("/api/booking", bookingRouter);
 
 app.use((req, res, next) => {

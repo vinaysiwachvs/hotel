@@ -49,8 +49,8 @@ const sendOtpToMobile = async (mobile, OTP) => {
 
 exports.signup = async (req, res) => {
     try {
-        const { name, email, password, mobile } = req.body;
-        const user = new User({ name, email, password, mobile });
+        const { name, email, password, mobile, role } = req.body;
+        const user = new User({ name, email, password, mobile, role });
         const _id = await authService.signup(user);
 
         const OTP = generateOtp();

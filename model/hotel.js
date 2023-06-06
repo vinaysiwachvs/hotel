@@ -49,9 +49,11 @@ const hotelSchema = new mongoose.Schema({
     rating: {
         type: Number,
     },
-    numOfRooms:{
-        type: Number,
-        required: true,
+    totalRooms:{
+        type: Number
+    },
+    totalAvaliableRooms:{
+        type: Number
     },
     reviews: [reviewSchema],
     createdOn: {

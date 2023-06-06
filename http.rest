@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3000/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDdkODk2MGNhMGExNTc5MDMzYWEwZmIiLCJuYW1lIjoiVmluYXkiLCJlbWFpbCI6InZpbmF5MTJzaXdhY2hAZ21haWwuY29tIiwiaWF0IjoxNjg1OTUxMDU1LCJleHAiOjE2ODU5OTQyNTV9.nVODbIsv0kkv0G9UEP10QHMv1OuFNZa1CStC_udMx7o
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDdkODk2MGNhMGExNTc5MDMzYWEwZmIiLCJpYXQiOjE2ODYwNDY1NzgsImV4cCI6MTY4NjA4OTc3OH0.xJGsaPBsmqsDZVWjCFLY2GeNeZSumzJ4Q7mOGe1iCjI
 
 
 ###
@@ -11,7 +11,7 @@ Content-Type: application/json
     "email":"test@gmail.com",
     "password":"Password@123",
     "mobile": "9876543210",
-    "role":"admin"
+    "role":"Admin"
 }
 
 ### Mobile Verification
@@ -48,36 +48,27 @@ Authorization: bearer {{token}}
 
 {}
 
-### Adding Hotel
-POST {{baseUrl}}/hotel
+
+### Get all user
+GET {{baseUrl}}/user
 Content-Type: application/json
 Authorization: bearer {{token}}
 
-{
-    "name":"Hotel 1",
-    "mobile":"9876543210",
-    "price":"1999",
-    "description":"Description 1",
-    "location":"City 1, State, Zip",
-    "image":"Image 1",
-    "amenities":"Amenities 1"
-}
+### Adding Hotel
 
-
-###
 POST {{baseUrl}}/hotel
 Content-Type: application/json
 Authorization: bearer {{token}}
 
 {
     "name":"Hotel 3",
-    "mobile":"9876543214",
+    "contact":"9876543214",
     "price":"2099",
     "description":"Description 3",
     "location":"City 3, State, Zip",
     "image":"Image 3",
     "amenities":"Amenities 1",
-    "numOfRooms": 20
+    "totalRooms":25
 }
 
 ### Get all hotels per page 
@@ -85,7 +76,7 @@ GET {{baseUrl}}/hotel
 Content-Type: application/json
 
 ### Get a particular hotel by Id
-GET {{baseUrl}}/hotel/647dcbf9923d6e3cd36f15af
+GET {{baseUrl}}/hotel/647f05e52f6e60bf6e55fafe
 Content-Type: application/json
 
 ### Create a Review on a particular hotel by it's Id
@@ -98,7 +89,7 @@ Authorization: Bearer {{token}}
 }
 
 ### Delete a particular Hotel by Id
-DELETE {{baseUrl}}/hotel/647dcbf9923d6e3cd36f15af
+DELETE {{baseUrl}}/hotel/647f05e52f6e60bf6e55fafe
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
