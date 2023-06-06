@@ -3,12 +3,12 @@ const hotelService = require("../service/hotel_service");
 
 exports.createHotel = async(req, res) => {
     try {
-        const { name, images, description, price, location, amenities, contact, totalAvaliableRooms, totalRooms } = req.body;
+        const { name, images, description, price, address, amenities, contact, totalAvaliableRooms, totalRooms } = req.body;
         const user = req.loggedInUser;
         if (!user) {
             throw new Error("User not found");
         }
-        const hotel = new Hotel({ name, images, description, price, location, amenities, contact, totalAvaliableRooms, totalRooms ,createdBy: user._id, updatedBy: user._id,});
+        const hotel = new Hotel({ name, images, description, price, address, amenities, contact, totalAvaliableRooms, totalRooms ,createdBy: user._id, updatedBy: user._id,});
         const result = await hotelService.createHotel(hotel);        
 
         res.status(201).json({ message: "Hotel created successfully", id : result });
@@ -68,5 +68,27 @@ exports.deleteHotel = async(req, res) => {
     }catch(error){
         console.log("error in deleting Hotel ", error)
         res.status(500).send({ message: error.message });
+    }
+};
+
+exports.searchByLocation = async(req, res) => {
+    try {
+        const  {address} = req.params;
+        const hotels = await Hotel.find({address});
+        res.json(hotels);
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+exports.searchByPriceRange = async(req, res) => {
+    try {
+        const { minPrice, maxPrice } = req.params;
+        const hotels = await Hotel.find({
+            price: { $gte: minPrice, $lte: maxPrice },
+        });
+        res.json(hotels);
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
     }
 };

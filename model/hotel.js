@@ -38,7 +38,7 @@ const hotelSchema = new mongoose.Schema({
         type: Number,
         required:true,
     },
-    location: {
+    address: {
         type: String,
         required: true,
         },
@@ -53,7 +53,8 @@ const hotelSchema = new mongoose.Schema({
         type: Number
     },
     totalAvaliableRooms:{
-        type: Number
+        type: Number,
+
     },
     reviews: [reviewSchema],
     createdOn: {
