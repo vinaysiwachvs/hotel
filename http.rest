@@ -1,14 +1,14 @@
 @baseUrl = http://localhost:3000/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDdkODk2MGNhMGExNTc5MDMzYWEwZmIiLCJpYXQiOjE2ODYwNDY1NzgsImV4cCI6MTY4NjA4OTc3OH0.xJGsaPBsmqsDZVWjCFLY2GeNeZSumzJ4Q7mOGe1iCjI
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDdlZmYyNTg3MzY1OTAwNWY4MzJiNjMiLCJpYXQiOjE2ODYxMzA2NTgsImV4cCI6MTY4NjE3Mzg1OH0.7SsFLf5TTJGdZUldMfjMDy_5pMGqpb2ZJ-IwFoE9fWo
 @address = delhi
 @minPrice = 5000
 @maxPrice = 10000
 
-@userId = 
+@userId = 647d8960ca0a1579033aa0fb
 
-@hotelId =
+@hotelId =64803ef03bd31bdffa7d0def
 
-@bookingId =
+@bookingId =648030b64fa1417b4c89e52f
 
 
 ###
@@ -16,11 +16,10 @@ POST {{baseUrl}}/auth/signup
 Content-Type: application/json
 
 {
-    "name":"Test",
-    "email":"test@gmail.com",
+    "name":"Test2",
+    "email":"test2@gmail.com",
     "password":"Password@123",
-    "mobile": "9876543210",
-    "role":"Admin"
+    "mobile": "98765243210"
 }
 
 ### Mobile Verification
@@ -46,7 +45,7 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-    "email":"vinay12siwach@gmail.com",
+    "email":"test@gmail.com",
     "password":"Password@123"
 }
 
@@ -70,14 +69,14 @@ Content-Type: application/json
 Authorization: bearer {{token}}
 
 {
-    "name":"Hotel 3",
+    "name":"Hotel 4",
     "contact":"9876543214",
     "price":"2099",
     "description":"Description 3",
     "address":"delhi",
     "image":"Image 3",
     "amenities":"Amenities 1",
-    "totalRooms":25
+    "rooms":25
 }
 
 ### Get all hotels per page 
@@ -85,21 +84,21 @@ GET {{baseUrl}}/hotel
 Content-Type: application/json
 
 ### Get a particular hotel by Id
-GET {{baseUrl}}/hotel/647f25ad8ba4bd4de19b2c2a
+GET {{baseUrl}}/hotel/{{hotelId}}
 Content-Type: application/json
 
 ### Create a Review on a particular hotel by it's Id
-POST {{baseUrl}}/hotel/647d9e476ec2cba43a167b4b/review
+POST {{baseUrl}}/hotel/{{hotelId}}/review
 content-type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "comment": "First Review on Hotel 3",
+    "comment": "Third Review on Hotel 3",
     "rating": 5
 }
 
 ### Delete a particular Hotel by Id
-DELETE {{baseUrl}}/hotel/647f05e52f6e60bf6e55fafe
+DELETE {{baseUrl}}/hotel/{{hotelId}}
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -121,11 +120,12 @@ Content-Type: application/json
 Authorization: bearer {{token}}
 
 {
+
     "hotelId":"{{hotelId}}",
     "userId":"{{userId}}",
-    "checkInDate": "2023-06-10",
-    "checkOutDate": "2023-06-12",
-    "rooms": 3
+    "checkInDate": "2023-06-22",
+    "checkOutDate": "2023-06-21",
+    "rooms": 25
 }
 
 ###

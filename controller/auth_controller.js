@@ -128,7 +128,7 @@ exports.verifyOtpByEmail = async (req, res) => {
         return res.status(400).json({ message: "Invalid OTP" });
     }
 
-    await User.updateOne({ email: email }, { emailVerified: true });
+    await User.updateOne({ email: email }, { emailVerified: true, isActive: true },{ new: true });
     const userInDB = await User.findOne({ email: email });
     if (userInDB.mobileVerified == true) await Otp.deleteOne({ email: email });
 
@@ -154,7 +154,7 @@ exports.verifyOtpByMobile = async (req, res) => {
         return res.status(400).json({ message: "Invalid OTP" });
     }
 
-    await User.updateOne({ mobile: mobile }, { mobileVerified: true });
+    await User.updateOne({ mobile: mobile }, { mobileVerified: true, isActive: true },{ new: true });
     const userInDB = await User.findOne({ mobile: mobile });
     if (userInDB.emailVerified == true) await Otp.deleteOne({ mobile: mobile });
 
@@ -164,5 +164,17 @@ exports.verifyOtpByMobile = async (req, res) => {
     } catch (error) {
         console.log("Error in verifying OTP ", error);
         res.status(400).send({ message: error.message });
+    }
+};
+
+
+exports.authorize = (roles) => {
+    return (req, res, next) => {
+        const user = req.loggedInUser;
+		if (roles.includes(user.role)){
+            next();
+        }else{
+            next(new Error("You are not authorized.",403));
+        }
     }
 };
