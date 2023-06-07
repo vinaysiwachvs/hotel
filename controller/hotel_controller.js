@@ -8,7 +8,7 @@ exports.createHotel = async(req, res) => {
         if (!user) {
             throw new Error("User not found");
         }
-        const hotel = new Hotel({name,images,mobile,description,price,address,amenities,rooms,availableRooms:rooms,rating,createdBy: user._id,updatedBy: user._id,});
+        const hotel = new Hotel({name,images,mobile,description,price,address,amenities,rooms,rating,createdBy: user._id,updatedBy: user._id,});
         await hotelService.createHotel(hotel);
 
         res
