@@ -15,6 +15,10 @@ const UserSchema = new mongoose.Schema({
                 `${props.value} contains special characters which are not allowed!`,
         },
     },
+    mobile: {
+        type: String,
+        required: true,
+    },
     email: {
         type: String,
         trim: true,
@@ -47,10 +51,6 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now(),
         immutable: true,
-    },
-    mobile: {
-        type: String,
-        required: true,
     },
     token: {
         type: String,

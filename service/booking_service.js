@@ -10,7 +10,10 @@ exports.bookHotel = async(hotelId,userId,checkInDate,checkOutDate,rooms) => {
         if (checkIn.getTime() >= checkOut.getTime()) {
             throw new Error("Check-in dates cannot be greater then check-out dates.");
         }
-
+        if (checkIn.getTime() <= Date.now()){
+            throw new Error("Past dates are not allowed.");
+        }
+        
         const existingBookings = await Booking.find({
             hotel: hotelId,
             $or: [{
