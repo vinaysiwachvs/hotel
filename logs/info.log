@@ -1,0 +1,19 @@
+[2023-06-07 07:07:19.197 PM] info: 	Database connected successfully
+[2023-06-07 07:07:54.018 PM] info: 	Database connected successfully
+[2023-06-07 07:10:34.184 PM] info: 	Database connected successfully
+[2023-06-07 07:11:45.789 PM] info: 	Database connected successfully
+[2023-06-07 07:12:33.637 PM] info: 	Database connected successfully
+[2023-06-07 07:14:32.233 PM] error: 	tokeneyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDdlZmYyNTg3MzY1OTAwNWY4MzJiNjMiLCJpYXQiOjE2ODYxMzA2NTgsImV4cCI6MTY4NjE3Mzg1OH0.7SsFLf5TTJGdZUldMfjMDy_5pMGqpb2ZJ-IwFoE9fWo
+[2023-06-07 07:14:32.234 PM] error: 	error in user post  logger is not defined
+[2023-06-07 07:15:45.458 PM] info: 	Database connected successfully
+[2023-06-07 07:15:47.063 PM] error: 	tokeneyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDdlZmYyNTg3MzY1OTAwNWY4MzJiNjMiLCJpYXQiOjE2ODYxMzA2NTgsImV4cCI6MTY4NjE3Mzg1OH0.7SsFLf5TTJGdZUldMfjMDy_5pMGqpb2ZJ-IwFoE9fWo
+[2023-06-07 07:15:47.065 PM] error: 	error in user post  logger is not defined
+[2023-06-07 07:18:04.351 PM] info: 	Database connected successfully
+[2023-06-07 07:19:06.131 PM] info: 	Database connected successfully
+[2023-06-07 07:19:12.480 PM] info: 	Database connected successfully
+[2023-06-07 07:19:22.521 PM] info: 	Database connected successfully
+[2023-06-07 07:19:56.362 PM] info: 	Database connected successfully
+[2023-06-07 07:20:12.626 PM] error: 	Cast to ObjectId failed for value "64803ef03bd31bdfsa7d0def" (type string) at path "_id" for model "Hotel"
+[2023-06-07 07:20:24.316 PM] error: 	tokeneyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDdlZmYyNTg3MzY1OTAwNWY4MzJiNjMiLCJpYXQiOjE2ODYxMzA2NTgsImV4cCI6MTY4NjE3Mzg1OH0.7SsFLf5TTJGdZUldMfjMDy_5pMGqpb2ZJ-IwFoE9fWo
+[2023-06-07 07:20:24.318 PM] error: 	error in user post  Cannot create property 'Symbol(level)' on string 'In Auth verifyToken '
+[2023-06-07 07:20:43.587 PM] error: 	error in user post  Cannot create property 'Symbol(level)' on string 'In Auth login  '

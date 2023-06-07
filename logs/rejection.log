@@ -1,0 +1,124 @@
+[2023-06-07 07:02:17.196 PM] error: 	unhandledRejection: logger is not defined
+ReferenceError: logger is not defined
+    at exports.bookHotel (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\controller\booking_controller.js:19:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[2023-06-07 07:06:02.113 PM] error: 	uncaughtException: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+TypeError: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+    at DerivedLogger.log (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\node_modules\winston\lib\winston\logger.js:214:20)
+    at Server.<anonymous> (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\index.js:43:12)
+    at Object.onceWrapper (node:events:627:28)
+    at Server.emit (node:events:513:28)
+    at emitListeningNT (node:net:1774:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+[2023-06-07 07:07:16.934 PM] error: 	uncaughtException: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+TypeError: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+    at DerivedLogger.log (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\node_modules\winston\lib\winston\logger.js:214:20)
+    at Server.<anonymous> (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\index.js:43:12)
+    at Object.onceWrapper (node:events:627:28)
+    at Server.emit (node:events:513:28)
+    at emitListeningNT (node:net:1774:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+[2023-06-07 07:07:51.800 PM] error: 	uncaughtException: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+TypeError: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+    at DerivedLogger.log (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\node_modules\winston\lib\winston\logger.js:214:20)
+    at Server.<anonymous> (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\index.js:43:12)
+    at Object.onceWrapper (node:events:627:28)
+    at Server.emit (node:events:513:28)
+    at emitListeningNT (node:net:1774:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+[2023-06-07 07:10:30.916 PM] error: 	uncaughtException: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+TypeError: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+    at DerivedLogger.log (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\node_modules\winston\lib\winston\logger.js:214:20)
+    at Server.<anonymous> (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\index.js:43:12)
+    at Object.onceWrapper (node:events:627:28)
+    at Server.emit (node:events:513:28)
+    at emitListeningNT (node:net:1774:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+[2023-06-07 07:11:43.361 PM] error: 	uncaughtException: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+TypeError: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+    at DerivedLogger.log (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\node_modules\winston\lib\winston\logger.js:214:20)
+    at Server.<anonymous> (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\index.js:43:12)
+    at Object.onceWrapper (node:events:627:28)
+    at Server.emit (node:events:513:28)
+    at emitListeningNT (node:net:1774:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+[2023-06-07 07:12:31.480 PM] error: 	uncaughtException: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+TypeError: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+    at DerivedLogger.log (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\node_modules\winston\lib\winston\logger.js:214:20)
+    at Server.<anonymous> (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\index.js:43:12)
+    at Object.onceWrapper (node:events:627:28)
+    at Server.emit (node:events:513:28)
+    at emitListeningNT (node:net:1774:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+[2023-06-07 07:15:42.159 PM] error: 	uncaughtException: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+TypeError: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+    at DerivedLogger.log (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\node_modules\winston\lib\winston\logger.js:214:20)
+    at Server.<anonymous> (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\index.js:43:12)
+    at Object.onceWrapper (node:events:627:28)
+    at Server.emit (node:events:513:28)
+    at emitListeningNT (node:net:1774:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+[2023-06-07 07:18:02.092 PM] error: 	uncaughtException: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+TypeError: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+    at DerivedLogger.log (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\node_modules\winston\lib\winston\logger.js:214:20)
+    at Server.<anonymous> (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\index.js:43:12)
+    at Object.onceWrapper (node:events:627:28)
+    at Server.emit (node:events:513:28)
+    at emitListeningNT (node:net:1774:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+[2023-06-07 07:19:03.838 PM] error: 	uncaughtException: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+TypeError: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+    at DerivedLogger.log (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\node_modules\winston\lib\winston\logger.js:214:20)
+    at Server.<anonymous> (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\index.js:43:12)
+    at Object.onceWrapper (node:events:627:28)
+    at Server.emit (node:events:513:28)
+    at emitListeningNT (node:net:1774:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+[2023-06-07 07:19:07.570 PM] error: 	uncaughtException: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+TypeError: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+    at DerivedLogger.log (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\node_modules\winston\lib\winston\logger.js:214:20)
+    at Server.<anonymous> (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\index.js:43:12)
+    at Object.onceWrapper (node:events:627:28)
+    at Server.emit (node:events:513:28)
+    at emitListeningNT (node:net:1774:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+[2023-06-07 07:19:08.846 PM] error: 	uncaughtException: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+TypeError: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+    at DerivedLogger.log (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\node_modules\winston\lib\winston\logger.js:214:20)
+    at Server.<anonymous> (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\index.js:43:12)
+    at Object.onceWrapper (node:events:627:28)
+    at Server.emit (node:events:513:28)
+    at emitListeningNT (node:net:1774:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+[2023-06-07 07:19:10.221 PM] error: 	uncaughtException: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+TypeError: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+    at DerivedLogger.log (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\node_modules\winston\lib\winston\logger.js:214:20)
+    at Server.<anonymous> (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\index.js:43:12)
+    at Object.onceWrapper (node:events:627:28)
+    at Server.emit (node:events:513:28)
+    at emitListeningNT (node:net:1774:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+[2023-06-07 07:19:20.372 PM] error: 	uncaughtException: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+TypeError: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+    at DerivedLogger.log (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\node_modules\winston\lib\winston\logger.js:214:20)
+    at Server.<anonymous> (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\index.js:43:12)
+    at Object.onceWrapper (node:events:627:28)
+    at Server.emit (node:events:513:28)
+    at emitListeningNT (node:net:1774:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+[2023-06-07 07:19:52.393 PM] error: 	uncaughtException: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+TypeError: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+    at DerivedLogger.log (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\node_modules\winston\lib\winston\logger.js:214:20)
+    at Server.<anonymous> (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\index.js:43:12)
+    at Object.onceWrapper (node:events:627:28)
+    at Server.emit (node:events:513:28)
+    at emitListeningNT (node:net:1774:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+[2023-06-07 07:19:54.131 PM] error: 	uncaughtException: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+TypeError: Cannot create property 'Symbol(level)' on string 'Server is running on port 3000'
+    at DerivedLogger.log (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\node_modules\winston\lib\winston\logger.js:214:20)
+    at Server.<anonymous> (C:\Users\Acer\OneDrive\Desktop\Work Space\hotel\hotel\index.js:43:12)
+    at Object.onceWrapper (node:events:627:28)
+    at Server.emit (node:events:513:28)
+    at emitListeningNT (node:net:1774:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
