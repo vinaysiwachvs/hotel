@@ -1,6 +1,6 @@
 const { Hotel } = require("../model/hotel");
 
-exports.getAllHotel = async (page, limit) => {
+exports.getAllHotel = async (page, limit, user) => {
     const parsedPage = parseInt(page);
     const parsedLimit = parseInt(limit);
 
@@ -11,7 +11,7 @@ exports.getAllHotel = async (page, limit) => {
 
     const skipIndex = (parsedPage - 1) * parsedLimit;
 
-    const hotels = await Hotel.aggregate([
+    let pipeline = [
         {
             $project: {
                 _id: 1,
@@ -20,29 +20,22 @@ exports.getAllHotel = async (page, limit) => {
                 price: 1,
                 description: 1,
                 createdOn: 1,
+                isActive: 1,
             },
         },
         { $skip: skipIndex },
         { $limit: parsedLimit },
-    ]);
+    ];
 
-    if (!hotels[0]) throw new Error("Hotel not found");
+    if (user.role !== "Admin") {
+        pipeline.unshift({
+            $match: {
+                isActive: true,
+            },
+        });
+    }
 
-    return hotels;
-};
-
-exports.getActiveHotel = async (page, limit) => {
-    const parsedPage = parseInt(page);
-    const parsedLimit = parseInt(limit);
-
-    if (parsedPage < 0 || parsedLimit < 0)
-        throw new Error(
-            `Please enter a positive value for page number or limit`,
-        );
-
-    const skipIndex = (parsedPage - 1) * parsedLimit;
-
-    const hotels = await Hotel.find({ isActive: true });
+    const hotels = await Hotel.aggregate(pipeline);
 
     if (!hotels[0]) throw new Error("Hotel not found");
 

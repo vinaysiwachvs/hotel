@@ -12,12 +12,7 @@ router
     .delete(verifyToken, authorize(["Admin"]), hotelController.deleteHotel);
 router.route("/:id/review").post(verifyToken, hotelController.createReview);
 
-router
-    .route("/all")
-    .get(verifyToken, authorize(["Admin"]), hotelController.getAllHotels);
-router
-    .route("/")
-    .get(verifyToken, authorize(["User"]), hotelController.getActiveHotels);
+router.route("/").get(verifyToken, hotelController.getAllHotels);
 router.route("/:id").get(hotelController.getHotelById);
 router
     .route("/:id")
