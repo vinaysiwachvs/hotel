@@ -6,6 +6,7 @@ exports.bookHotel = async(req, res) => {
     try {
         const { hotelId, userId, checkInDate, checkOutDate, rooms } = req.body;
         const hotel = await hotelService.getHotelById(hotelId);
+        
         const booking = await bookingService.bookHotel(hotelId,userId,checkInDate,checkOutDate,rooms);
 
         res.status(200).send({ booking });

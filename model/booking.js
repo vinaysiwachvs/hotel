@@ -19,6 +19,9 @@ const bookingSchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
+    cost:{
+        type: Number,
+    },
     rooms: {
         type: Number,
         required: true,
