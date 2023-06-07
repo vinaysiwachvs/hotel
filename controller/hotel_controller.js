@@ -1,26 +1,49 @@
 const hotelService = require("../service/hotel_service");
 const { Hotel } = require("../model/hotel");
 
-exports.createHotel = async(req, res) => {
+exports.createHotel = async (req, res) => {
     try {
-        const {name,images,mobile,description,price,address,rooms,amenities,rating,} = req.body;
+        const {
+            name,
+            images,
+            mobile,
+            description,
+            price,
+            address,
+            rooms,
+            amenities,
+            rating,
+        } = req.body;
         const user = req.loggedInUser;
         if (!user) {
             throw new Error("User not found");
         }
-        const hotel = new Hotel({name,images,mobile,description,price,address,amenities,rooms,rating,createdBy: user._id,updatedBy: user._id,});
+        const hotel = new Hotel({
+            name,
+            images,
+            mobile,
+            description,
+            price,
+            address,
+            amenities,
+            rooms,
+            rating,
+            createdBy: user._id,
+            updatedBy: user._id,
+        });
         await hotelService.createHotel(hotel);
 
-        res
-            .status(201)
-            .json({ id: hotel._id, message: "Hotel created successfully" });
+        res.status(201).json({
+            id: hotel._id,
+            message: "Hotel created successfully",
+        });
     } catch (error) {
         console.log("error in create hotel ", error);
         res.status(400).send({ message: error.message });
     }
 };
 
-exports.getAllHotels = async(req, res) => {
+exports.getAllHotels = async (req, res) => {
     const page = req.query.page || 1;
     const limit = req.query.limit || 5;
     try {
@@ -32,7 +55,31 @@ exports.getAllHotels = async(req, res) => {
     }
 };
 
-exports.getHotelById = async(req, res) => {
+exports.getActiveHotels = async (req, res) => {
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 5;
+    try {
+        const hotels = await hotelService.getActiveHotel(page, limit);
+        return res.json(hotels);
+    } catch (error) {
+        console.log("error in getting hotels ", error);
+        res.status(400).send({ message: error.message });
+    }
+};
+
+exports.getActiveHotel = async (req, res) => {
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 5;
+    try {
+        const hotels = await hotelService.getActiveHotel(page, limit);
+        return res.json(hotels);
+    } catch (error) {
+        console.log("error in getting hotels ", error);
+        res.status(400).send({ message: error.message });
+    }
+};
+
+exports.getHotelById = async (req, res) => {
     try {
         const id = req.params.id;
         const hotel = await hotelService.getHotelById(id);
@@ -45,14 +92,19 @@ exports.getHotelById = async(req, res) => {
     }
 };
 
-exports.createReview = async(req, res) => {
+exports.createReview = async (req, res) => {
     try {
         const hotelId = req.params.id;
         const { comment, rating } = req.body;
 
         const userId = req.loggedInUser._id;
-        const hotel = await hotelService.getHotelById(hotelId)
-        const result = await hotelService.createReview(hotelId, userId, comment, rating);
+        const hotel = await hotelService.getHotelById(hotelId);
+        const result = await hotelService.createReview(
+            hotelId,
+            userId,
+            comment,
+            rating,
+        );
 
         res.status(201).json({ message: result });
     } catch (error) {
@@ -61,19 +113,19 @@ exports.createReview = async(req, res) => {
     }
 };
 
-exports.deleteHotel = async(req, res) => {
+exports.deleteHotel = async (req, res) => {
     try {
         const hotelId = req.params.id;
         const userid = req.loggedInUser;
-        const result= await hotelService.deleteHotel(hotelId,userid);
+        const result = await hotelService.deleteHotel(hotelId, userid);
         res.status(201).send({ message: result });
-    }catch(error){
-        console.log("error in deleting Hotel ", error)
+    } catch (error) {
+        console.log("error in deleting Hotel ", error);
         res.status(400).send({ message: error.message });
     }
 };
 
-exports.getReviews = async(req, res) => {
+exports.getReviews = async (req, res) => {
     try {
         const hotelId = req.params.id;
         const hotel = await hotelService.getHotelById(hotelId);
@@ -85,7 +137,7 @@ exports.getReviews = async(req, res) => {
     }
 };
 
-exports.searchByLocation = async(req, res) => {
+exports.searchByLocation = async (req, res) => {
     try {
         const { location } = req.params;
         const hotels = await Hotel.find({ location });
@@ -95,10 +147,14 @@ exports.searchByLocation = async(req, res) => {
     }
 };
 
-exports.searchByPriceRange = async(req, res) => {
+exports.searchByPriceRange = async (req, res) => {
     try {
         const { minPrice, maxPrice } = req.params;
-        if( minPrice > maxPrice) throw new Error("minmum price should be less then maximum price",400);
+        if (minPrice > maxPrice)
+            throw new Error(
+                "minmum price should be less then maximum price",
+                400,
+            );
         const hotels = await Hotel.find({
             price: { $gte: minPrice, $lte: maxPrice },
         });
@@ -108,7 +164,7 @@ exports.searchByPriceRange = async(req, res) => {
     }
 };
 
-exports.searchByRating = async(req, res) => {
+exports.searchByRating = async (req, res) => {
     try {
         const { rating } = req.params;
         const hotels = await Hotel.find({ rating: { $gte: rating } });
@@ -118,7 +174,7 @@ exports.searchByRating = async(req, res) => {
     }
 };
 
-exports.activeHotel = async(req, res) => {
+exports.activeHotel = async (req, res) => {
     try {
         const hotelId = req.params.id;
         const userid = req.loggedInUser;
