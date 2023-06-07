@@ -39,13 +39,7 @@ exports.bookHotel = async(hotelId,userId,checkInDate,checkOutDate,rooms) => {
             throw new Error(`Only ${availableRooms} room(s) available `);
         }
 
-        const newBooking = new Booking({
-            hotel: hotelId,
-            user: userId,
-            checkInDate,
-            checkOutDate,
-            rooms,
-        });
+        const newBooking = new Booking({hotel: hotelId,user: userId,checkInDate,checkOutDate,rooms,});
 
         const savedBooking = await newBooking.save();
 

@@ -1,7 +1,7 @@
 @baseUrl = http://localhost:3000/api
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDdlZmYyNTg3MzY1OTAwNWY4MzJiNjMiLCJpYXQiOjE2ODYxMzA2NTgsImV4cCI6MTY4NjE3Mzg1OH0.7SsFLf5TTJGdZUldMfjMDy_5pMGqpb2ZJ-IwFoE9fWo
 @address = delhi
-@minPrice = 5000
+@minPrice = 50000
 @maxPrice = 10000
 
 @userId = 647d8960ca0a1579033aa0fb
@@ -16,10 +16,10 @@ POST {{baseUrl}}/auth/signup
 Content-Type: application/json
 
 {
-    "name":"Test2",
-    "email":"test2@gmail.com",
+    "name":"Vinay",
+    "email":"Vinay12siwach@gmail.com",
     "password":"Password@123",
-    "mobile": "98765243210"
+    "mobile": "+447893932118"
 }
 
 ### Mobile Verification
@@ -27,8 +27,8 @@ POST {{baseUrl}}/auth/mobile-otp-verification
 Content-Type: application/json
 
 {
-    "mobile": "9876543210",
-    "otp" : "132621"
+    "mobile": "+447893932118",
+    "otp" : "816442"
 }
 
 ### E-mail Verification
@@ -36,8 +36,8 @@ POST {{baseUrl}}/auth/email-otp-verification
 Content-Type: application/json
 
 {
-    "email":"test@gmail.com",
-    "otp" : "132621"
+    "email":"vinay12siwach@gmail.com",
+    "otp" : "743975"
 }
 
 ### Login 
@@ -45,7 +45,7 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-    "email":"test@gmail.com",
+    "email":"vinay12siwach@gmail.com",
     "password":"Password@123"
 }
 
@@ -102,6 +102,11 @@ DELETE {{baseUrl}}/hotel/{{hotelId}}
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
+###
+PATCH {{baseUrl}}/hotel/{{hotelId}}
+Content-Type: application/json
+Authorization: bearer {{token}}
+
 
 ### Search by Location
 GET {{baseUrl}}/hotel/search/address/{{address}}
@@ -132,3 +137,4 @@ Authorization: bearer {{token}}
 DELETE {{baseUrl}}/hotel/booking/{{bookingId}}
 Content-Type: application/json
 Authorization: bearer {{token}}
+

@@ -1,4 +1,4 @@
-const { Hotel } = require("../model/hotel");
+    const { Hotel } = require("../model/hotel");
 
 exports.getAllHotel = async(page, limit) => {
     const parsedPage = parseInt(page);
@@ -71,4 +71,15 @@ exports.deleteHotel = async(hotelId) => {
             console.log("Hotel not found");
             return { message: "Hotel do not exist" };
         } else return { message: "Hotel removed successfully from list" };
+};
+
+exports.activeHotel = async(hotelId) => {
+    const hotel = await Hotel.findById(hotelId);
+    const activeHotel = await Hotel.findByIdAndUpdate(hotelId, {
+        isActive: true,
+    });
+    if (!activeHotel) {
+        console.log("Hotel not found");
+        return { message: "Hotel do not exist" };
+    } else return { message: "Hotel added successfully to list" };
 };

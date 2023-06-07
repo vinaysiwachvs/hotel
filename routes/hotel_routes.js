@@ -10,6 +10,8 @@ router.route("/:id/review").post(verifyToken, hotelController.createReview);
 
 router.route("/").get(hotelController.getAllHotels);
 router.route("/:id").get(hotelController.getHotelById);
+router.route("/:id").patch(verifyToken, authorize(["Admin"]), hotelController.activeHotel);
+
 router.get("/search/address/:address", hotelController.searchByLocation);
 router.get("/search/price/:minPrice/:maxPrice",hotelController.searchByPriceRange);
 

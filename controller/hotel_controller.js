@@ -51,13 +51,13 @@ exports.createReview = async(req, res) => {
         const { comment, rating } = req.body;
 
         const userId = req.loggedInUser._id;
-
+        const hotel = await hotelService.getHotelById(hotelId)
         const result = await hotelService.createReview(hotelId, userId, comment, rating);
 
         res.status(201).json({ message: result });
     } catch (error) {
         console.error("error occured in adding a review", error);
-        res.status(400).json({ message: "Internal server error" });
+        res.status(400).json({ message: error.message });
     }
 };
 
@@ -98,6 +98,7 @@ exports.searchByLocation = async(req, res) => {
 exports.searchByPriceRange = async(req, res) => {
     try {
         const { minPrice, maxPrice } = req.params;
+        if( minPrice > maxPrice) throw new Error("minmum price should be less then maximum price",400);
         const hotels = await Hotel.find({
             price: { $gte: minPrice, $lte: maxPrice },
         });
@@ -113,6 +114,18 @@ exports.searchByRating = async(req, res) => {
         const hotels = await Hotel.find({ rating: { $gte: rating } });
         res.json(hotels);
     } catch (error) {
+        res.status(400).send({ message: error.message });
+    }
+};
+
+exports.activeHotel = async(req, res) => {
+    try {
+        const hotelId = req.params.id;
+        const userid = req.loggedInUser;
+        const result = await hotelService.activeHotel(hotelId, userid);
+        res.status(200).send({ message: result });
+    } catch (error) {
+        console.log("error in deleting Hotel ", error);
         res.status(400).send({ message: error.message });
     }
 };
