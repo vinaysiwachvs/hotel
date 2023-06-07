@@ -30,20 +30,19 @@ exports.bookHotel = async(hotelId,userId,checkInDate,checkOutDate,rooms) => {
         const bookedRooms = existingBookings.reduce((total, booking) => total + booking.rooms,0);
 
         const hotel = await Hotel.findById(hotelId);
-        // console.log(hotel);
+
         if (!hotel) {
             throw new Error("Hotel not found.");
         }
 
         const availableRooms = hotel.rooms - bookedRooms;
-        // console.log(bookedRooms);
         if (rooms > availableRooms) {
             throw new Error(`Only ${availableRooms} room(s) available `);
         }
-        const cost = hotel.price * bookedRooms;
-        // console.log(cost,hotel.price);
-        const newBooking = new Booking({hotel: hotelId,user: userId,checkInDate,checkOutDate,rooms,cost});
+        
+        const cost = hotel.price * rooms;
 
+        const newBooking = new Booking({hotel: hotelId,user: userId,checkInDate,checkOutDate,rooms,cost});
         const savedBooking = await newBooking.save();
         return savedBooking;
 };
