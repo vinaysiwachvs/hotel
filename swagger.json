@@ -6,7 +6,7 @@
     },
     "servers": [
         {
-            "url": "http://localhost:3000/api",
+            "url": "https://hotel-app-le9o.onrender.com/api-docs/",
             "description": "Hotel Reservation"
         }
     ],

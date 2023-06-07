@@ -3,12 +3,12 @@ const { Hotel } = require("../model/hotel");
 
 exports.createHotel = async(req, res) => {
     try {
-        const {name,images,mobile,description,price,address,rooms,availableRooms,amenities,rating,} = req.body;
+        const {name,images,mobile,description,price,address,rooms,amenities,rating,} = req.body;
         const user = req.loggedInUser;
         if (!user) {
             throw new Error("User not found");
         }
-        const hotel = new Hotel({name,images,mobile,description,price,address,amenities,rooms,availableRooms,rating,createdBy: user._id,updatedBy: user._id,});
+        const hotel = new Hotel({name,images,mobile,description,price,address,amenities,rooms,availableRooms:rooms,rating,createdBy: user._id,updatedBy: user._id,});
         await hotelService.createHotel(hotel);
 
         res
