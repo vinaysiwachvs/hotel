@@ -63,7 +63,6 @@ exports.createReview = async(hotelId, userId, comment, rating) => {
 };
 
 exports.deleteHotel = async(hotelId, userId) => {
-    try {
         const hotel = await Hotel.findById(hotelId);
         if (!hotel.createdBy == userId)
             throw new Error("Not authorized to delete hotel");
@@ -74,8 +73,4 @@ exports.deleteHotel = async(hotelId, userId) => {
             console.log("Hotel not found");
             return { message: "Hotel do not exist" };
         } else return { message: "Hotel removed successfully from list" };
-    } catch (error) {
-        console.error(error);
-        throw new Error("Failed to delete Hotel");
-    }
 };

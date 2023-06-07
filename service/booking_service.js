@@ -2,11 +2,13 @@ const Booking = require("../model/booking");
 const { Hotel } = require("../model/hotel");
 
 exports.bookHotel = async(hotelId,userId,checkInDate,checkOutDate,rooms) => {
-    try {
         const checkIn = new Date(checkInDate);
         const checkOut = new Date(checkOutDate);
         if (checkIn.getTime() === checkOut.getTime()) {
             throw new Error("Check-in and check-out dates cannot be the same.");
+        }
+        if (checkIn.getTime() >= checkOut.getTime()) {
+            throw new Error("Check-in dates cannot be greater then check-out dates.");
         }
 
         const existingBookings = await Booking.find({
@@ -51,13 +53,9 @@ exports.bookHotel = async(hotelId,userId,checkInDate,checkOutDate,rooms) => {
         await hotel.save();
 
         return savedBooking;
-    } catch (error) {
-        console.error(error);
-    }
 };
 
 exports.cancelBookedHotel = async(bookingId) => {
-    try {
         const canceledBooking = await Booking.findByIdAndDelete(bookingId);
 
         if (canceledBooking) {
@@ -74,8 +72,4 @@ exports.cancelBookedHotel = async(bookingId) => {
         }
 
         return null;
-    } catch (error) {
-        console.error(error);
-        throw new Error("An error occurred while canceling the hotel booking.");
-    }
 };

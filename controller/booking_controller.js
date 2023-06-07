@@ -11,7 +11,7 @@ exports.bookHotel = async(req, res) => {
         console.error(error);
         res
             .status(400)
-            .json({ error: "An error occurred while booking the hotel." });
+            .json({ error: error.message });
     }
 };
 

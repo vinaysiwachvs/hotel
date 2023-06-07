@@ -69,7 +69,7 @@ exports.deleteHotel = async(req, res) => {
         res.status(201).send({ message: result });
     }catch(error){
         console.log("error in deleting Hotel ", error)
-        res.status(500).send({ message: error.message });
+        res.status(400).send({ message: error.message });
     }
 };
 
