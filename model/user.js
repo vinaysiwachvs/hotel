@@ -6,9 +6,8 @@ const UserSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-        unique: true,
         validate: {
-            validator: function(name) {
+            validator: function (name) {
                 return /^[a-zA-Z0-9 ]*$/.test(name);
             },
             message: (props) =>
@@ -27,7 +26,7 @@ const UserSchema = new mongoose.Schema({
         lowercase: true,
         immutable: true,
         validate: {
-            validator: function(email) {
+            validator: function (email) {
                 var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
                 return re.test(email);
             },
@@ -38,7 +37,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         validate: {
-            validator: function(password) {
+            validator: function (password) {
                 var re =
                     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
                 return re.test(password);
@@ -72,31 +71,32 @@ const UserSchema = new mongoose.Schema({
         enum: ["Admin", "User"],
         default: "User",
     },
-    book: [{
-        hotelId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Hotel"
+    book: [
+        {
+            hotelId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Hotel",
+            },
+            rooms: {
+                type: Number,
+                default: 1,
+            },
         },
-        rooms: {
-            type: Number,
-            default: 1
-        }
-    }]
-
+    ],
 });
 
-UserSchema.pre("save", async function(next) {
+UserSchema.pre("save", async function (next) {
     const encryptedPassword = await hashPassword(this.password);
     this.password = encryptedPassword;
     next();
 });
 
-const hashPassword = async(password) => {
+const hashPassword = async (password) => {
     const salt = await bcrypt.genSalt(8);
     return await bcrypt.hash(password, salt);
 };
 
-UserSchema.methods.comparePassword = async function(password) {
+UserSchema.methods.comparePassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 

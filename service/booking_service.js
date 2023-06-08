@@ -1,67 +1,86 @@
 const Booking = require("../model/booking");
 const { Hotel } = require("../model/hotel");
 
-exports.bookHotel = async(hotelId,userId,checkInDate,checkOutDate,rooms) => {
-        const checkIn = new Date(checkInDate);
-        const checkOut = new Date(checkOutDate);
-        if (checkIn.getTime() === checkOut.getTime()) {
-            throw new Error("Check-in and check-out dates cannot be the same.");
-        }
-        if (checkIn.getTime() >= checkOut.getTime()) {
-            throw new Error("Check-in dates cannot be greater then check-out dates.");
-        }
-        if (checkIn.getTime() <= Date.now()){
-            throw new Error("Past dates are not allowed.");
-        }
-        
-        const existingBookings = await Booking.find({
-            hotel: hotelId,
-            $or: [{
-                    checkInDate: { $lte: checkInDate },
-                    checkOutDate: { $gt: checkInDate },
-                },
-                {
-                    checkInDate: { $lt: checkOutDate },
-                    checkOutDate: { $gte: checkOutDate },
-                },
-            ],
-        });
+exports.bookHotel = async (
+    hotelId,
+    userId,
+    checkInDate,
+    checkOutDate,
+    rooms,
+) => {
+    const checkIn = new Date(checkInDate);
+    const checkOut = new Date(checkOutDate);
+    if (checkIn.getTime() === checkOut.getTime()) {
+        throw new Error("Check-in and check-out dates cannot be the same.");
+    }
+    if (checkIn.getTime() >= checkOut.getTime()) {
+        throw new Error(
+            "Check-in dates cannot be greater then check-out dates.",
+        );
+    }
+    if (checkIn.getTime() <= Date.now()) {
+        throw new Error("Past dates are not allowed.");
+    }
 
-        const bookedRooms = existingBookings.reduce((total, booking) => total + booking.rooms,0);
+    const existingBookings = await Booking.find({
+        hotel: hotelId,
+        $or: [
+            {
+                checkInDate: { $lte: checkInDate },
+                checkOutDate: { $gt: checkInDate },
+            },
+            {
+                checkInDate: { $lt: checkOutDate },
+                checkOutDate: { $gte: checkOutDate },
+            },
+        ],
+    });
 
-        const hotel = await Hotel.findById(hotelId);
+    const bookedRooms = existingBookings.reduce(
+        (total, booking) => total + booking.rooms,
+        0,
+    );
 
-        if (!hotel) {
-            throw new Error("Hotel not found.");
-        }
+    const hotel = await Hotel.findById(hotelId);
 
-        const availableRooms = hotel.rooms - bookedRooms;
-        if (rooms > availableRooms) {
-            throw new Error(`Only ${availableRooms} room(s) available `);
-        }
-        
-        const cost = hotel.price * rooms;
+    if (!hotel) {
+        throw new Error("Hotel not found.");
+    }
 
-        const newBooking = new Booking({hotel: hotelId,user: userId,checkInDate,checkOutDate,rooms,cost});
-        const savedBooking = await newBooking.save();
-        return savedBooking;
+    const availableRooms = hotel.rooms - bookedRooms;
+    if (rooms > availableRooms) {
+        throw new Error(`Only ${availableRooms} room(s) available`);
+    }
+
+    const cost = hotel.price * rooms;
+
+    const newBooking = new Booking({
+        hotel: hotelId,
+        user: userId,
+        checkInDate,
+        checkOutDate,
+        rooms,
+        cost,
+    });
+    const savedBooking = await newBooking.save();
+    return savedBooking;
 };
 
-exports.cancelBookedHotel = async(bookingId) => {
-        const canceledBooking = await Booking.findByIdAndDelete(bookingId);
+exports.cancelBookedHotel = async (bookingId) => {
+    const canceledBooking = await Booking.findByIdAndDelete(bookingId);
 
-        if (canceledBooking) {
-            const { hotel, rooms } = canceledBooking;
+    if (canceledBooking) {
+        const { hotel, rooms } = canceledBooking;
 
-            const hotelToUpdate = await Hotel.findById(hotel);
+        const hotelToUpdate = await Hotel.findById(hotel);
 
-            if (hotelToUpdate) {
-                hotelToUpdate.availableRooms += rooms;
-                await hotelToUpdate.save();
-            }
-
-            return canceledBooking;
+        if (hotelToUpdate) {
+            hotelToUpdate.availableRooms += rooms;
+            await hotelToUpdate.save();
         }
 
-        return null;
+        return canceledBooking;
+    }
+
+    return null;
 };

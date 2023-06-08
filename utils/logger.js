@@ -4,7 +4,7 @@ const { combine, timestamp, printf, align } = winston.format;
 const { dirname } = require("path");
 const appDir = dirname(require.main.filename);
 
-const logger = winston.createLogger({
+exports.logger = winston.createLogger({
     level: process.env.LOG_LEVEL || "debug",
     format: combine(
         timestamp({
@@ -40,5 +40,3 @@ const logger = winston.createLogger({
 });
 
 logger.exitOnError = false;
-
-module.exports = logger;
