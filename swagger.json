@@ -143,11 +143,6 @@
                         }
                     }
                 }
-            },
-            "get":{
-                "tags": [
-                    "Auth"
-                ]
             }
         },
         "/auth/email-otp-verification": {
