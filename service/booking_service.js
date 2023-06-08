@@ -51,8 +51,8 @@ exports.bookHotel = async (
     if (rooms > availableRooms) {
         throw new Error(`Only ${availableRooms} room(s) available`);
     }
-
-    const cost = hotel.price * rooms;
+    const noOfDays = (checkOut - checkIn) / 86400000;
+    const cost = hotel.price * rooms * noOfDays;
 
     const newBooking = new Booking({
         hotel: hotelId,

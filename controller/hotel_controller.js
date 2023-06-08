@@ -68,18 +68,6 @@ exports.getActiveHotels = async (req, res) => {
     }
 };
 
-exports.getActiveHotel = async (req, res) => {
-    const page = req.query.page || 1;
-    const limit = req.query.limit || 5;
-    try {
-        const hotels = await hotelService.getActiveHotel(page, limit);
-        return res.json(hotels);
-    } catch (error) {
-        console.log("error in getting hotels ", error);
-        res.status(400).send({ message: error.message });
-    }
-};
-
 exports.getHotelById = async (req, res) => {
     try {
         const id = req.params.id;
