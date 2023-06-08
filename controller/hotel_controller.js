@@ -139,11 +139,8 @@ exports.searchByLocation = async (req, res) => {
 exports.searchByPriceRange = async (req, res) => {
     try {
         const { minPrice, maxPrice } = req.params;
-        if (minPrice > maxPrice)
-            throw new Error(
-                "minmum price should be less then maximum price",
-                400,
-            );
+        if (Number(minPrice) > Number(maxPrice))
+            throw new Error("minimum price should be less then maximum price");
         const hotels = await Hotel.find({
             price: { $gte: minPrice, $lte: maxPrice },
         });

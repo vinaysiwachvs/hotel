@@ -1,14 +1,14 @@
 @baseUrl = http://localhost:3000/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDdlZmYyNTg3MzY1OTAwNWY4MzJiNjMiLCJpYXQiOjE2ODYxMzA2NTgsImV4cCI6MTY4NjE3Mzg1OH0.7SsFLf5TTJGdZUldMfjMDy_5pMGqpb2ZJ-IwFoE9fWo
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgxN2VhZDJjZmZlOThkMzE0ZWI1NmEiLCJpYXQiOjE2ODYyMDgxODksImV4cCI6MTY4NjI1MTM4OX0.RS4-RQW5-SCLM62gI8sO80kjOw0g2LcF4OXIIFnbmpo
 @address = delhi
-@minPrice = 50000
+@minPrice = 5000
 @maxPrice = 10000
 
 @userId = 647d8960ca0a1579033aa0fb
 
-@hotelId =64803ef03bd31bdffa7d0def
+@hotelId =6481749f67187588fca9a2fa
 
-@bookingId =648030b64fa1417b4c89e52f
+@bookingId =6481842708c18ec4c3fba06a
 
 
 ###
@@ -37,7 +37,7 @@ Content-Type: application/json
 
 {
     "email":"vinay12siwach@gmail.com",
-    "otp" : "743975"
+    "otp" : "733317"
 }
 
 ### Login 
@@ -53,8 +53,6 @@ Content-Type: application/json
 POST {{baseUrl}}/auth/logout
 Content-Type: application/json
 Authorization: bearer {{token}}
-
-{}
 
 
 ### Get all user
@@ -82,6 +80,7 @@ Authorization: bearer {{token}}
 ### Get all hotels per page 
 GET {{baseUrl}}/hotel
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ### Get a particular hotel by Id
 GET {{baseUrl}}/hotel/{{hotelId}}
@@ -128,9 +127,9 @@ Authorization: bearer {{token}}
 
     "hotelId":"{{hotelId}}",
     "userId":"{{userId}}",
-    "checkInDate": "2023-06-22",
-    "checkOutDate": "2023-06-21",
-    "rooms": 25
+    "checkInDate": "2023-06-20",
+    "checkOutDate": "2023-06-22",
+    "rooms": 1
 }
 
 ###
