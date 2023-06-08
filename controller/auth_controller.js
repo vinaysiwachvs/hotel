@@ -20,14 +20,14 @@ const generateOtp = () => {
     return OTP;
 };
 
-    const sendOtpToEmail = async (email, OTP) => {
+const sendOtpToEmail = async (email, OTP) => {
     const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: process.env.AUTH_EMAIL,
-        pass: process.env.AUTH_PASS,
-    },
-});
+        service: "gmail",
+        auth: {
+            user: process.env.AUTH_EMAIL,
+            pass: process.env.AUTH_PASS,
+        },
+    });
 
     await transporter.sendMail({
         from: `"Message from Hotel Reservation System" <process.env.AUTH_EMAIL>`,
@@ -62,8 +62,9 @@ exports.signup = async (req, res) => {
 
         res.status(201).json({
             id: _id,
-            message:"OTP sent successfully on your registered email and mobile number. Please Verify",
-    });
+            message:
+                "OTP sent ssuccessfully on your registered email and mobile number. Please Verify",
+        });
     } catch (error) {
         console.log("error in user post ", error);
         res.status(400).send({ message: error.message });
@@ -99,19 +100,19 @@ exports.verifyToken = async (req, res, next) => {
     try {
         const authHeader = req.headers["authorization"];
         if (!authHeader)
-        throw new Error({ message: "Access Denied. Please send Token" }); 
+            throw new Error({ message: "Access Denied. Please send Token" });
 
-    const token = authHeader.split(" ")[1];
-    if (!token)
-        throw new Error({ message: "Access Denied. Please send Token" });
-    console.log("token" + token);
+        const token = authHeader.split(" ")[1];
+        if (!token)
+            throw new Error({ message: "Access Denied. Please send Token" });
+        console.log("token" + token);
 
-    const user = await authService.verifyToken(token);
-    req.loggedInUser = user;
-    next();
+        const user = await authService.verifyToken(token);
+        req.loggedInUser = user;
+        next();
     } catch (error) {
-    console.log("error in user post ", error);
-    res.status(400).send({ message: error.message });
+        console.log("error in user post ", error);
+        res.status(400).send({ message: error.message });
     }
 };
 
@@ -119,26 +120,31 @@ exports.verifyOtpByEmail = async (req, res) => {
     try {
         const { email, otp } = req.body;
         const otpHolder = await Otp.findOne({ email });
-    if (!otpHolder) {
-        return res.status(400).json({ message: "OTP not found" });
-    }
+        if (!otpHolder) {
+            return res.status(400).json({ message: "OTP not found" });
+        }
 
-    const isOtpValid = await bcrypt.compare(otp, otpHolder.otp);
-    if (!isOtpValid) {
-        return res.status(400).json({ message: "Invalid OTP" });
-    }
+        const isOtpValid = await bcrypt.compare(otp, otpHolder.otp);
+        if (!isOtpValid) {
+            return res.status(400).json({ message: "Invalid OTP" });
+        }
 
-    await User.updateOne({ email: email }, { emailVerified: true, isActive: true },{ new: true });
-    const userInDB = await User.findOne({ email: email });
-    if (userInDB.mobileVerified == true) await Otp.deleteOne({ email: email });
+        await User.updateOne(
+            { email: email },
+            { emailVerified: true, isActive: true },
+            { new: true },
+        );
+        const userInDB = await User.findOne({ email: email });
+        if (userInDB.mobileVerified == true)
+            await Otp.deleteOne({ email: email });
 
-    return res.status(200).json({
-        message: "Email verified Succesfully",
-    });
+        return res.status(200).json({
+            message: "Email verified Succesfully",
+        });
     } catch (error) {
         console.log("Error in verifying OTP ", error);
         res.status(400).send({ message: error.message });
-}
+    }
 };
 
 exports.verifyOtpByMobile = async (req, res) => {
@@ -147,34 +153,38 @@ exports.verifyOtpByMobile = async (req, res) => {
         const otpHolder = await Otp.findOne({ mobile });
         if (!otpHolder) {
             return res.status(400).json({ message: "OTP not found" });
-    }
+        }
 
-    const isOtpValid = await bcrypt.compare(otp, otpHolder.otp);
-    if (!isOtpValid) {
-        return res.status(400).json({ message: "Invalid OTP" });
-    }
+        const isOtpValid = await bcrypt.compare(otp, otpHolder.otp);
+        if (!isOtpValid) {
+            return res.status(400).json({ message: "Invalid OTP" });
+        }
 
-    await User.updateOne({ mobile: mobile }, { mobileVerified: true, isActive: true },{ new: true });
-    const userInDB = await User.findOne({ mobile: mobile });
-    if (userInDB.emailVerified == true) await Otp.deleteOne({ mobile: mobile });
+        await User.updateOne(
+            { mobile: mobile },
+            { mobileVerified: true, isActive: true },
+            { new: true },
+        );
+        const userInDB = await User.findOne({ mobile: mobile });
+        if (userInDB.emailVerified == true)
+            await Otp.deleteOne({ mobile: mobile });
 
-    return res.status(200).json({
-        message: "Mobile number verified successfully",
-    });
+        return res.status(200).json({
+            message: "Mobile number verified successfully",
+        });
     } catch (error) {
         console.log("Error in verifying OTP ", error);
         res.status(400).send({ message: error.message });
     }
 };
 
-
 exports.authorize = (roles) => {
     return (req, res, next) => {
         const user = req.loggedInUser;
-		if (roles.includes(user.role)){
+        if (roles.includes(user.role)) {
             next();
-        }else{
-            next(new Error("You are not authorized.",403));
+        } else {
+            res.status(401).send({ message: "You are not authorized." });
         }
-    }
+    };
 };

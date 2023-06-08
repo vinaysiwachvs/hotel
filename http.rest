@@ -1,6 +1,9 @@
 @baseUrl = http://localhost:3000/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgxN2VhZDJjZmZlOThkMzE0ZWI1NmEiLCJpYXQiOjE2ODYyMDgxODksImV4cCI6MTY4NjI1MTM4OX0.RS4-RQW5-SCLM62gI8sO80kjOw0g2LcF4OXIIFnbmpo
-@address = delhi
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgxYTI1YjMyYjgzMTQ3MmM3MmUyMjciLCJpYXQiOjE2ODYyMTc0MDUsImV4cCI6MTY4NjI2MDYwNX0.7aGdq7TAXdYU7xtzPvqXa5D8uN9Tg5Ha9mvhhsos3Jw
+
+@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgxNmZkOTY3MTg3NTg4ZmNhOWEyY2IiLCJpYXQiOjE2ODYyMjU3ODEsImV4cCI6MTY4NjI2ODk4MX0.uuiSbvXqnBx8ObAnzlglPW7ONDOV14E6ClHHlkFcHtk
+
+@address = Bathinda
 @minPrice = 5000
 @maxPrice = 10000
 
@@ -16,8 +19,8 @@ POST {{baseUrl}}/auth/signup
 Content-Type: application/json
 
 {
-    "name":"Vinay",
-    "email":"Vinay12siwach@gmail.com",
+    "name":"Annu",
+    "email":"annu@gmail.com",
     "password":"Password@123",
     "mobile": "+447893932118"
 }
@@ -36,8 +39,8 @@ POST {{baseUrl}}/auth/email-otp-verification
 Content-Type: application/json
 
 {
-    "email":"vinay12siwach@gmail.com",
-    "otp" : "733317"
+    "email":"annu@gmail.com",
+    "otp" : "412181"
 }
 
 ### Login 
@@ -45,8 +48,8 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-    "email":"vinay12siwach@gmail.com",
-    "password":"Password@123"
+    "email":"ramandeep.kaur291089@gmail.com",
+    "password":"Admin@123"
 }
 
 ### LogOut
