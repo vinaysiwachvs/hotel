@@ -6,7 +6,7 @@
     },
     "servers": [
         {
-            "url": "https://hotel-app-le9o.onrender.com/api-docs/",
+            "url": "https://hotel-app-le9o.onrender.com/api",
             "description": "Hotel Reservation"
         }
     ],
@@ -18,6 +18,10 @@
         {
             "name": "Auth",
             "description": "API for authorization in the system"
+        },
+        {
+            "name": "User",
+            "description": "API for User in the system"
         }
     ],
     "schemes":["http"],
@@ -27,6 +31,19 @@
     "produces": [
         "application/json"
     ],
+
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "in": "header"
+            }
+        }
+    },
+
     "paths": {
         "/auth/signup": {
             "post": {
@@ -126,6 +143,11 @@
                         }
                     }
                 }
+            },
+            "get":{
+                "tags": [
+                    "Auth"
+                ]
             }
         },
         "/auth/email-otp-verification": {
@@ -200,7 +222,38 @@
                 }
             }
         },
-        "/book": {
+        "/user":{
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get all User",
+                "description": "Getting all user of the system",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User found successfully",
+                        "schema": {
+                            "$ref": "#/definitions/LogoutResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error in getting User",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/hotel":{
             "post": {
                 "security": [
                     {
@@ -208,16 +261,16 @@
                     }
                 ],
                 "tags": [
-                    "Book"
+                    "Hotel"
                 ],
-                "summary": "Add Hotel to book",
-                "description": "Add hotel to book",
+                "summary": "Create Hotel",
+                "description": "Adding a new  hotel to the system",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                            "$ref":"#/definitions/BookInput"
+                            "$ref":"#/definitions/hotel"
                             }
                         }
                     }
@@ -227,29 +280,192 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Hotel added to Booking successfully",
+                        "description": "Hotel created successfully",
                         "schema": {
                             "$ref": "#/definitions/LogoutResponse"
                         }
                     },
                     "400": {
-                        "description": "Error in adding hotel to booking",
+                        "description": "Error in creating hotel",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Hotel"
+                ],
+                "summary": "Getting all Hotel",
+                "description": "Getting a new  hotel of the system",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Hotel found successfully",
+                        "schema": {
+                            "$ref": "#/definitions/LogoutResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error in getting hotel",
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }
                     }
                 }
             }
-        }
-    },
-    "components": {
-        "securitySchemes": {
-            "bearerAuth": {
-                "type": "apiKey",
-                "name": "Authorization",
-                "scheme": "bearer",
-                "bearerFormat": "JWT",
-                "in": "header"
+        },
+        "hotel/:id":{
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Hotel"
+                ],
+                "summary": "Get Hotel by Id",
+                "description": "Get a particular Hotel by Id",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Hotel found successfully",
+                        "schema": {
+                            "$ref": "#/definitions/LogoutResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error in getting hotel",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Hotel"
+                ],
+                "summary": "Deactivating Hotel by Id",
+                "description": "Deactivating Hotel by Id",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Hotel deactivated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/LogoutResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error in deactivating hotel",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Hotel"
+                ],
+                "summary": "Activating Hotel by Id",
+                "description": "Activating Hotel by Id",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Hotel activated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/LogoutResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error in activating hotel",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "hotel/booking":{
+            "post":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Hotel"
+                ],
+                "summary": "Activating Hotel by Id",
+                "description": "Activating Hotel by Id",
+                "responses": {
+                    "200": {
+                        "description": "Hotel activated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/LogoutResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error in activating hotel",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "hotel/booking/:id":{
+            "delete":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Hotel"
+                ],
+                "summary": "Activating Hotel by Id",
+                "description": "Activating Hotel by Id",
+                "responses": {
+                    "200": {
+                        "description": "Hotel activated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/LogoutResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error in activating hotel",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
         }
     },
@@ -273,6 +489,9 @@
                 },
                 "mobile": {
                     "type": "string"
+                },
+                "role":{
+                    "type":"string"
                 }
             }
         },
@@ -369,6 +588,43 @@
                 },
                 "otp": {
                     "type": "string"
+                }
+            }
+        },
+        "hotel": {
+            "required": [
+                "name",
+                "mobile",
+                "price",
+                "description",
+                "address",
+                "amenities",
+                "images"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "address":{
+                    "type": "string"
+                },
+                "amenities":{
+                    "type":["string"]
+                },
+                "images":{
+                    "type":["string"]
+                },
+                "rooms":{
+                    "type":"number"
                 }
             }
         }
