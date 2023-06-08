@@ -83,10 +83,9 @@ exports.getActiveHotel = async (req, res) => {
 exports.getHotelById = async (req, res) => {
     try {
         const id = req.params.id;
-        const user = req.loggedInUser;
-        const hotel = await hotelService.getHotelById(id, user);
+        const hotel = await hotelService.getHotelById(id);
         if (!hotel) {
-            res.status(404).send("Hotel not found");
+            res.status(404).send("Hotel not found or in active");
         } else res.status(200).send(hotel);
     } catch (error) {
         console.log("error in getting hotel by id ", error);
@@ -141,8 +140,8 @@ exports.getReviews = async (req, res) => {
 
 exports.searchByLocation = async (req, res) => {
     try {
-        const { location } = req.params;
-        const hotels = await Hotel.find({ location });
+        const { address } = req.params;
+        const hotels = await Hotel.find({ address });
         res.json(hotels);
     } catch (error) {
         res.status(400).send({ message: error.message });

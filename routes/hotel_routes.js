@@ -13,7 +13,7 @@ router
 router.route("/:id/review").post(verifyToken, hotelController.createReview);
 
 router.route("/").get(verifyToken, hotelController.getAllHotels);
-router.route("/:id").get(verifyToken, hotelController.getHotelById);
+router.route("/:id").get(hotelController.getHotelById);
 router
     .route("/:id")
     .patch(verifyToken, authorize(["Admin"]), hotelController.activeHotel);
