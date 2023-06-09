@@ -1,13 +1,7 @@
 const Booking = require("../model/booking");
 const { Hotel } = require("../model/hotel");
 
-exports.bookHotel = async (
-    hotelId,
-    userId,
-    checkInDate,
-    checkOutDate,
-    rooms,
-) => {
+exports.bookHotel = async (hotelId, user, checkInDate, checkOutDate, rooms) => {
     const checkIn = new Date(checkInDate);
     const checkOut = new Date(checkOutDate);
     if (checkIn.getTime() === checkOut.getTime()) {
@@ -56,7 +50,7 @@ exports.bookHotel = async (
 
     const newBooking = new Booking({
         hotel: hotelId,
-        user: userId,
+        user: user._id,
         checkInDate,
         checkOutDate,
         rooms,
@@ -66,21 +60,24 @@ exports.bookHotel = async (
     return savedBooking;
 };
 
-exports.cancelBookedHotel = async (bookingId) => {
-    const canceledBooking = await Booking.findByIdAndDelete(bookingId);
+exports.cancelBookedHotel = async (hotelId, bookingId, user) => {
+    const hotel = await Hotel.findById(hotelId);
+    if (!hotel) throw new Error("Hotel not found");
+    const booking = await Booking.findById(bookingId);
+    if (!booking) throw new Error("No booking found");
+    if (user.role == "Admin" || toString(user._id) === toString(booking.user)) {
+        const canceledBooking = await Booking.findByIdAndDelete(bookingId);
+        if (canceledBooking) {
+            const { hotel, rooms } = canceledBooking;
 
-    if (canceledBooking) {
-        const { hotel, rooms } = canceledBooking;
+            const hotelToUpdate = await Hotel.findById(hotel);
 
-        const hotelToUpdate = await Hotel.findById(hotel);
+            if (hotelToUpdate) {
+                hotelToUpdate.availableRooms += rooms;
+                await hotelToUpdate.save();
+            }
 
-        if (hotelToUpdate) {
-            hotelToUpdate.availableRooms += rooms;
-            await hotelToUpdate.save();
+            return canceledBooking;
         }
-
-        return canceledBooking;
     }
-
-    return null;
 };

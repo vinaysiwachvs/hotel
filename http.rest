@@ -1,7 +1,7 @@
 @baseUrl = http://localhost:3000/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgxYTI1YjMyYjgzMTQ3MmM3MmUyMjciLCJpYXQiOjE2ODYyMTc0MDUsImV4cCI6MTY4NjI2MDYwNX0.7aGdq7TAXdYU7xtzPvqXa5D8uN9Tg5Ha9mvhhsos3Jw
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgxNmRlMjY3MTg3NTg4ZmNhOWEyYjMiLCJpYXQiOjE2ODYyODg5MjUsImV4cCI6MTY4NjMzMjEyNX0.uIsW4fjeXuHvMsOWGaZH287EOtPbiZf7sirO0mPyyNw
 
-@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgxNmZkOTY3MTg3NTg4ZmNhOWEyY2IiLCJpYXQiOjE2ODYyMjU3ODEsImV4cCI6MTY4NjI2ODk4MX0.uuiSbvXqnBx8ObAnzlglPW7ONDOV14E6ClHHlkFcHtk
+@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgxNmZkOTY3MTg3NTg4ZmNhOWEyY2IiLCJpYXQiOjE2ODYyODg4NzIsImV4cCI6MTY4NjMzMjA3Mn0.QoDvCKxUGUE5kvZ-PnNVYYLyvWuaTej5FUEOjxB547w
 
 @address = Bathinda
 @minPrice = 5000
@@ -9,9 +9,9 @@
 
 @userId = 647d8960ca0a1579033aa0fb
 
-@hotelId =6481749f67187588fca9a2fa
+@hotelId =648170f967187588fca9a2d9
 
-@bookingId =6481842708c18ec4c3fba06a
+@bookingId =6482c1aa18a6e0c63cf2ec67
 
 
 ###
@@ -52,6 +52,15 @@ Content-Type: application/json
     "password":"Admin@123"
 }
 
+### Login 
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "email":"ramanbth@gmail.com",
+    "password":"Admin@123"
+}
+
 ### LogOut
 POST {{baseUrl}}/auth/logout
 Content-Type: application/json
@@ -83,7 +92,8 @@ Authorization: bearer {{token}}
 ### Get all hotels per page 
 GET {{baseUrl}}/hotel
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer {{tokenAdmin}}
+
 
 ### Get a particular hotel by Id
 GET {{baseUrl}}/hotel/{{hotelId}}
@@ -102,12 +112,12 @@ Authorization: Bearer {{token}}
 ### Delete a particular Hotel by Id
 DELETE {{baseUrl}}/hotel/{{hotelId}}
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer {{tokenAdmin}}
 
 ###
 PATCH {{baseUrl}}/hotel/{{hotelId}}
 Content-Type: application/json
-Authorization: bearer {{token}}
+Authorization: bearer {{tokenAdmin}}
 
 
 ### Search by Location
@@ -122,21 +132,19 @@ content-type: application/json
 Authorization: Bearer {{token}}
 
 ###
-POST {{baseUrl}}/hotel/booking
+POST {{baseUrl}}/hotel/{{hotelId}}/booking
 Content-Type: application/json
 Authorization: bearer {{token}}
 
 {
 
-    "hotelId":"{{hotelId}}",
-    "userId":"{{userId}}",
     "checkInDate": "2023-06-20",
     "checkOutDate": "2023-06-22",
     "rooms": 1
 }
 
 ###
-DELETE {{baseUrl}}/hotel/booking/{{bookingId}}
+DELETE {{baseUrl}}/hotel/{{hotelId}}/booking/{{bookingId}}
 Content-Type: application/json
 Authorization: bearer {{token}}
 

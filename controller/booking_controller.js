@@ -1,15 +1,17 @@
-const { findById } = require("../model/booking");
 const bookingService = require("../service/booking_service");
 const hotelService = require("../service/hotel_service");
 
 exports.bookHotel = async (req, res) => {
     try {
-        const { hotelId, userId, checkInDate, checkOutDate, rooms } = req.body;
+        const hotelId = req.params.id;
+        const { checkInDate, checkOutDate, rooms } = req.body;
+        const user = req.loggedInUser;
+        // console.log(user);
         const hotel = await hotelService.getHotelById(hotelId);
 
         const booking = await bookingService.bookHotel(
             hotelId,
-            userId,
+            user,
             checkInDate,
             checkOutDate,
             rooms,
@@ -24,10 +26,15 @@ exports.bookHotel = async (req, res) => {
 
 exports.cancelBookedHotel = async (req, res) => {
     try {
-        const { bookingId } = req.params;
+        const hotelId = req.params.id;
+        const bookingId = req.params.bookingId;
+        const user = req.loggedInUser;
+        // console.log(user);
 
         const canceledBooking = await bookingService.cancelBookedHotel(
+            hotelId,
             bookingId,
+            user,
         );
 
         if (canceledBooking) {

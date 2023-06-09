@@ -24,7 +24,11 @@ router.get(
     hotelController.searchByPriceRange,
 );
 
-router.post("/booking", bookingController.bookHotel);
-router.delete("/booking/:bookingId", bookingController.cancelBookedHotel);
+router.post("/:id/booking", verifyToken, bookingController.bookHotel);
+router.delete(
+    "/:id/booking/:bookingId",
+    verifyToken,
+    bookingController.cancelBookedHotel,
+);
 
 module.exports = router;
