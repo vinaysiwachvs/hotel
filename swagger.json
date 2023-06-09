@@ -318,7 +318,7 @@
                 }
             }
         },
-        "hotel/:id":{
+        "/hotel/:id":{
             "get": {
                 "security": [
                     {

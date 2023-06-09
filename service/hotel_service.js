@@ -45,7 +45,6 @@ exports.getHotelById = async (id) => {
     if (hotel.isActive == false) {
         throw new Error("Hotel is inactive");
     }
-    console.log(hotel);
     return hotel;
 };
 
